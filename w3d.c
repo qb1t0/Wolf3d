@@ -22,7 +22,7 @@ int main (int ac, char **av)
 
     wolf_load_menu(&m);                                                 // creates game launch menu
 
-    mlx_mouse_hook(m.win, wolf_onmouse, &m);                            //  \.
-    mlx_hook(m.win, 2, 5, wolf_onbutton, &m);                           //   |  mlx loop and hooks functions
-    mlx_loop(m.mlx);                                                    //  /
+    mlx_mouse_hook(m.win, wolf_onmouse, &m);                            /*  \*/
+    mlx_hook(m.win, 2, 5, wolf_onbutton, &m);                           /*   |  mlx loop and hooks functions
+    mlx_loop(m.mlx);                                                    /*  /*/
 }
