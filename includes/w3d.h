@@ -113,8 +113,8 @@ typedef struct      s_ray{
 */
 
 typedef struct      s_map{
-    double          x_start;
-    double          y_start;
+    double          x_player;
+    double          y_player;
     double          x_plane;
     double          y_plane;
     double          x_direct;
