@@ -9,8 +9,8 @@
 # include "../libft/ft_printf/ft_printf.h"
 
 # define N 4                /* threads number   */
-# define HEIGHT 1440        /* window height    */
-# define WIDTH 2560         /* window width     */
+# define HEIGHT 960         /* window height    */
+# define WIDTH 1280         /* window width     */
 # define MHEIGHT 24         /* map height       */
 # define MWIDTH 24          /* map width        */
 # define USAGE "[usage]:\t./wolf3d"
@@ -85,8 +85,6 @@ typedef struct      s_ray{
     double          _disty;
     int             mapx;
     int             mapy;
-
-
 }                   t_ray;
 
 /*
@@ -138,6 +136,7 @@ typedef struct      s_map{
 **  c;      +==))   color variable                                        ø
 **  mus;    +==))   music variable ( ? on : off)                          ø
 **  part;   +==))   1/4 part of window for threads                        ø
+**  game;   +==))   if game was started                                   ø
 ** _______________________________________________________________________ø
 */
 
@@ -152,6 +151,8 @@ typedef struct      s_mlx{
     int             c;
     int             mus;
     int             part;
+    int             type;
+    int             game;
 }                   t_mlx;
 
 /*
@@ -182,7 +183,9 @@ int     wolf_onmouse(int b, int x, int y, t_mlx *m);
 ** Creates starting page in new widow with game menu.                     ø
 ** _______________________________________________________________________ø
 */
-
+void    wolf_load_game(t_mlx *m);
 void    wolf_load_menu(t_mlx *m);
+void    wolf_load_default(t_map *g);
+void    wolf_load_settings(t_mlx *m, int type);
 
 #endif //WOLF3D
