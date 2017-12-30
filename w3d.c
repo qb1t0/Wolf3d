@@ -1,7 +1,5 @@
 #include "includes/w3d.h"
 
-
-
 /*
 ** Opening settings menu
 */
@@ -13,17 +11,20 @@ void    wolf_load_settings(t_mlx *m, int type)
     a = 1280;
     b = 960;
     mlx_clear_window(m->mlx, m->win); //clear previous image
-    if (type)
+    m->type = type;                   //redefining global type
+    if (type == 3)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/control.xpm", &a, &b);
     else
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/setings.xpm", &a, &b);
     m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
     mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+    if (type == 2)
+        wolf_settings_add(m);
     mlx_do_sync(m->mlx);
 }
 
 /*
-**  Creating menu window
+**  Creating MAIN STARTING MENU window
 */
 
 void    wolf_load_menu(t_mlx *m)
@@ -38,13 +39,12 @@ void    wolf_load_menu(t_mlx *m)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/menuoff.xpm", &a, &b);
     m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
     mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-    //mlx_xpm_to_image(m->mlx, lol, &a, &b);
-    //mlx_destroy_image(m->mlx, m->img);
     mlx_do_sync(m->mlx);
 }
 
 /*
 ** Setting default game values
+** P.S: Runs, when New game starts
 */
 
 void    wolf_load_default(t_map *g)
@@ -60,6 +60,13 @@ void    wolf_load_default(t_map *g)
     //todO: run main algorithm from here
 }
 
+
+/*
+** Main program function here
+** - Declaring main mlx struct: t_mlx *m;
+** - Loads default data in structure values
+*/
+
 int main (int ac, char **av)
 {
     t_map g;
@@ -67,16 +74,17 @@ int main (int ac, char **av)
 
     if (ac != 1) exit(ft_printf(COL_GREEN USAGE COL_EOC));              // handles argument error
 
-    m.type = 0;
-    m.game = 0;                                                         // in-game mode: OFF
-    m.mus = 0;                                                          // music default: ON
+    m.g = NULL;                                                         // game struct
+    m.speed = 1;                                                        // player speed (game complexity)
+    m.type = 0;                                                         // set window-default type value
+    m.game = 0;                                                         // DEFAULT: in-game mode: OFF
+    m.mus = 1;                                                          // DEFAULT: music: ON
     m.sl = 0;                                                           //  \|
     m.bpp = 0;                                                          //   |  new window initializing
     m.mlx = mlx_init();                                                 //   |  by the default values
     m.win = mlx_new_window(m.mlx, WIDTH, HEIGHT, "wolf3d, (c)ysalata"); //  /|
 
     wolf_load_menu(&m);                                                 // creates game launch menu
-    wolf_load_default(&g);
     mlx_mouse_hook(m.win, wolf_onmouse, &m);                            //  \|
     mlx_hook(m.win, 2, 5, wolf_onbutton, &m);                           //   |  mlx loop and hooks functions
     mlx_loop(m.mlx);                                                    //  /|

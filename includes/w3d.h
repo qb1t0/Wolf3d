@@ -153,6 +153,8 @@ typedef struct      s_mlx{
     int             part;
     int             type;
     int             game;
+    int             speed;
+    struct s_map    *g;
 }                   t_mlx;
 
 /*
@@ -165,6 +167,9 @@ typedef struct      s_mlx{
 
 void	wolf_pixel_draw(t_mlx *f, int x, int y, int c);
 
+
+//TodO: add description
+void    wolf_settings_add(t_mlx *m);
 /*
 ** Functions wolf_onbutton(), wolf_onmouse():
 ** _______________________________________________________________________
