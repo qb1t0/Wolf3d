@@ -1,4 +1,5 @@
 #include "includes/w3d.h"
+//http://lodev.org/cgtutor/raycasting.html
 
 /*
 ** Opening settings menu
@@ -47,17 +48,21 @@ void    wolf_load_menu(t_mlx *m)
 ** P.S: Runs, when New game starts
 */
 
-void    wolf_load_default(t_map *g)
+void    wolf_load_default(t_mlx *m)
 {
-    g->oldtime = 0;
-    g->curtime = 0;
-    g->x_plane = 0;
-    g->y_plane = 0.66;
-    g->y_direct = 0;
-    g->x_direct = -1;
-    g->x_player = 22;
-    g->y_player = 12;
+    m->score = 0;
+    m->t = 0;
+    //TODO: Segfault HERE
+    m->g->oldtime = 0;                                                  // previous frame time
+    m->g->curtime = 0;                                                  // current frame time
+    m->g->x_plane = 0;                                                  // 2d raycaster of camera plane
+    m->g->y_plane = 0.66;                                               //     -//-
+    m->g->y_direct = 0;                                                 // direct vector
+    m->g->x_direct = -1;                                                //     -//-
+    m->g->x_player = 22;                                                // x start position
+    m->g->y_player = 12;                                                // y start position
     //todO: run main algorithm from here
+    wolf_load_game(m, 0);                                               // 0 - starting x-coordinate
 }
 
 

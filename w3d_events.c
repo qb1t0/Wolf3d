@@ -9,7 +9,7 @@ void    wolf_menu_hook(int x, int y, t_mlx *m)
         wolf_load_default(m);
     }
     else if (y > 520 && y < 550 && x > 45 && x < 277)   // resume game
-        (m->type == 1) ? wolf_load_game(m) : 0;
+        (m->type == 1) ? wolf_load_game(m, 0) : 0;
     else if (y > 570 && y < 600 && x > 45 && x < 310)   // control panel
         wolf_load_settings(m, 3);
     else if (y > 616 && y < 642 && x > 45 && x < 217)   // settings
@@ -58,14 +58,19 @@ void    wolf_settings_hook(int x, int y, t_mlx *m)
         wolf_load_settings(m, 2);
 }
 
+/*
+** Function wolf_onbutton():
+**  - Meets the button events(in-game mode priority)
+*/
+
 int     wolf_onbutton(int button, t_mlx *m)
 {
     //mlx_clear_window(m->mlx, m->win); //clear previous image
-        //debug features
-        printf(COL_GREEN"button:\n\t\tkey: %d\n"COL_EOC, button);
+    //debug features
+    printf(COL_GREEN"button:\n\t\tkey: %d\n"COL_EOC, button);
     if (button == 53)
         exit(53);
-    if (m->game)
+    else if (m->game)
     {
 
     }
@@ -88,14 +93,14 @@ int     wolf_onmouse(int b, int x, int y, t_mlx *m)
         return (0);
     //mlx_clear_window(m->mlx, m->win); //clear previous image
 
-        //debug features
-        printf(COL_LBLUE"mouse: \n\t\tkey: %d, x: %d, y: %d\n"COL_EOC, b, x, y);
+    //debug features
+    printf(COL_LBLUE"mouse: \n\t\tkey: %d, x: %d, y: %d\n"COL_EOC, b, x, y);
     //main functional code here
     if (m->type == 0 || m->type == 1)       // main menu type (game was started or not)
         wolf_menu_hook(x, y, m);
     else if (m->type == 2 || m->type == 3)  // in-submenu mode
         wolf_settings_hook(x, y, m);
-    else if (m->type == 4)                  // in-game mode
-        ;
+//    else if (m->type == 4)                  // in-game mode
+//        ;
     return (1);
 }
