@@ -129,6 +129,8 @@ typedef struct      s_map{
     double          y_direct;
     float           oldtime;
     float           curtime;
+    double          mspeed;
+    double          rspeed;
 }                   t_map;
 
 
@@ -193,8 +195,20 @@ typedef struct      s_mlx{
     char            *_score;
     int             score;
     int             speed;
-    struct s_map    *g;
+    struct s_map    g;
 }                   t_mlx;
+
+/*
+** Function for game controls:
+** _______________________________________________________________________
+**                                                                        ø
+**  wolf_move_ws() moving BACK/FORWARD                                    ø
+**  wolf_move_ad() moving LEFT/RIGHT                                      ø
+** _______________________________________________________________________ø
+*/
+
+void    wolf_move_ws(t_mlx *m, int type);
+void    wolf_move_ad(t_mlx *m, int type);
 
 /*
 ** Function wolf_pixel_draw():

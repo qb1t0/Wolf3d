@@ -6,6 +6,7 @@
  * - call drawing algorithm
 */
 //Todo: write drawing func call here(to bresenhem)
+
 void    wolf_load_image(t_mlx *m, t_ray *r, int x)
 {
     int lheight;    //line height
@@ -78,6 +79,7 @@ void    wolf_define_dside(t_ray *r)
         r->stepy = 1;
         r->dsidey = (r->mapy + 1.0 - r->rposy) * r->_disty;
     }
+    wolf_dda(r);
 }
 
 /*
@@ -108,27 +110,21 @@ t_ray   wolf_define_ray(t_map *g, int x)
 
 /*
 ** Resuming game function
- * Todo: recursive with x (width ) limit
 */
 
 int    wolf_load_game(t_mlx *m, int x)
 {
     t_ray r;
 
-    //var define
-    r = wolf_define_ray(m->g, x);
-    //step calculate
-    wolf_define_dside(&r);
-    //calculate distance projected on camera direction
-    if (r.side)
+    r = wolf_define_ray(&m->g, x);
+    wolf_define_dside(&r);                                          //step calculate
+    if (r.side)                                                     //calculate distance projected on camera direction
         r.wdist = (r.mapx - r.rposx + (1 - r.stepx) / 2) / r.rdirx;
     else
         r.wdist = (r.mapy - r.rposy + (1 - r.stepy) / 2) / r.rdiry;
-    //step draw calls from here
-    wolf_load_image(m, &r, x);
-    //recursive exit condition
-    if (x < WIDTH)
+    wolf_load_image(m, &r, x);                                      //step draw calls from here
+    if (x < 1200)                                                   //recursive exit condition
         return (wolf_load_game(m, ++x));
-    //drawing game info-menu here
-    wolf_draw_info(m);
+    wolf_draw_info(m);                                              //drawing game info-menu here
+    return (0xDEAD);
 }

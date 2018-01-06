@@ -33,10 +33,13 @@ void	wolf_pixel_draw(t_mlx *m, t_ray *r, int x, int y)
 
 void    wolf_draw_info(t_mlx *m)
 {
-    m->_t = m->t;
-    m->t = clock() / CLOCKS_PER_SEC;
-    m->_fps = ft_itoa((1.0 / (m->t - m->_t)));
-    m->_score = (char) ft_itoa(m->score);
+    m->g.oldtime = m->g.curtime;
+    m->g.curtime = clock();
+    m->g.curtime /= CLOCKS_PER_SEC;
+    m->_fps = ft_itoa((1.0 / (m->g.curtime- m->g.oldtime)));
+    m->_score = ft_itoa(m->score);
+    m->g.mspeed = (m->g.curtime - m->g.oldtime) * 5.0; // move speed (squares/sec)
+    m->g.rspeed = (m->g.curtime - m->g.oldtime) * 3.0; // rotation speed (radians/sec)
     mlx_string_put(m->mlx, m->win, 700, 0, 0x000000, "fps:");
     mlx_string_put(m->mlx, m->win, 760, 0, 0x000000, m->_fps);
     mlx_string_put(m->mlx, m->win, 700, 50, 0x000000, "score:");
@@ -105,4 +108,13 @@ void	wolf_bresenhem(t_mlx *m, t_ray *r, int x, int layer)
         }
         wolf_pixel_draw(m, r, a.x * m->bpp / 8, a.y * m->sl);
     }
+//    a.x = x;
+//    a.y = r->edraw;
+//    a.dh = r->sdraw - r->edraw;
+//    wolf_pixel_draw(m, r, a.x * m->bpp / 8, a.y * m->sl);
+//    while (++k < a.dh)
+//    {
+//        ++a.y;
+//        wolf_pixel_draw(m, r, a.x * m->bpp / 8, a.y * m->sl);
+//    }
 }

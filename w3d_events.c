@@ -72,9 +72,25 @@ int     wolf_onbutton(int button, t_mlx *m)
         exit(53);
     else if (m->game)
     {
-
+        if (button == 13 || button == 1) // W & S
+            wolf_move_ws(m, button);
+        else if (button == 0 || button == 2) // A & D
+            wolf_move_ad(m, button);
+        else if (button == 35)              //pause, loading menu
+        {
+            m->game = 0;
+            m->type = 1;
+            wolf_load_menu(m);
+        }
     }
-        //TodO: write button events here
+    else
+        return (0);
+    mlx_clear_window(m->mlx, m->win); //clear previous image
+    mlx_do_sync(m->mlx);
+    m->img = mlx_new_image(m->win, WIDTH, HEIGHT + 1);
+    m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
+    wolf_load_game(m, 0);
+    mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
     return (1);
 }
 
