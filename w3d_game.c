@@ -93,38 +93,43 @@ t_ray   wolf_define_ray(t_map *g, int x)
 
     //was there a wall hit?
     r.hit = 0;
+
     //calculate ray position and direction
     r.xcam = 2 * x / (double)WIDTH - 1;
     r.rposx = g->x_player;
     r.rposy = g->y_player;
     r.rdirx = g->x_direct + g->x_plane * r.xcam;
     r.rdiry = g->y_direct + g->y_plane * r.xcam;
+
     //which box of the map we're in
     r.mapx = (int)r.rposx;
     r.mapy = (int)r.rposy;
+
     //length of ray from one x or y-side to next x or y-side
     r._distx = sqrt(1 + (r.rdiry * r.rdiry) / (r.rdirx * r.rdirx));
     r._disty = sqrt(1 + (r.rdirx * r.rdirx) / (r.rdiry * r.rdiry));
+
     return (r);
 }
 
 /*
-** Resuming game function
+** Function wolf_load_game():
+**  - Calculating and printing game function
 */
 
 int    wolf_load_game(t_mlx *m, int x)
 {
     t_ray r;
 
-    r = wolf_define_ray(&m->g, x);
-    wolf_define_dside(&r);                                          //step calculate
-    if (r.side)                                                     //calculate distance projected on camera direction
+    r = wolf_define_ray(&m->g, x);                                  // ray-casting calculates
+    wolf_define_dside(&r);                                          // step calculates
+    if (r.side)                                                     // distance projected on cam direction calculates
         r.wdist = (r.mapx - r.rposx + (1 - r.stepx) / 2) / r.rdirx;
     else
         r.wdist = (r.mapy - r.rposy + (1 - r.stepy) / 2) / r.rdiry;
-    wolf_load_image(m, &r, x);                                      //step draw calls from here
-    if (x < 1200)                                                   //recursive exit condition
+    wolf_load_image(m, &r, x);                                      // step drawing calls from here
+    if (x < 1200)                                                   // recursive exit condition
         return (wolf_load_game(m, ++x));
-    wolf_draw_info(m);                                              //drawing game info-menu here
-    return (0xDEAD);
+    wolf_draw_info(m);                                              // drawing game info-menu here
+    return (0xDEAD);                                                // fun useless return
 }

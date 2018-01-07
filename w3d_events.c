@@ -1,5 +1,10 @@
 #include "includes/w3d.h"
 
+/*
+**  Function  wolf_menu_hook():
+**  - Processes buttons in "Main menu" window
+*/
+
 void    wolf_menu_hook(int x, int y, t_mlx *m)
 {
     if (y > 475 && y < 500 && x > 45 && x < 215)        // new game
@@ -11,19 +16,19 @@ void    wolf_menu_hook(int x, int y, t_mlx *m)
     else if (y > 520 && y < 550 && x > 45 && x < 277)   // resume game
         (m->type == 1) ? wolf_load_game(m, 0) : 0;
     else if (y > 570 && y < 600 && x > 45 && x < 310)   // control panel
-        wolf_load_settings(m, 3);
+        wolf_load_submenu(m, 3);
     else if (y > 616 && y < 642 && x > 45 && x < 217)   // settings
-        wolf_load_settings(m, 2);
+        wolf_load_submenu(m, 2);
     else if (y > 665 && y < 690 && x > 45 && x < 130)   // exit
         exit(1);
 }
 
 /*
-** Function  wolf_settings_buttons():
+** Function  wolf_submenu_buttons():
 **  - Processes buttons in "Settings" menu
 */
 
-int     wolf_settings_buttons(int x, int y, t_mlx *m)
+int     wolf_submenu_buttons(int x, int y, t_mlx *m)
 {
     if (y > 352 && y < 369 && x > 366 && x < 385)
         m->mus = 1;
@@ -39,14 +44,14 @@ int     wolf_settings_buttons(int x, int y, t_mlx *m)
 }
 
 /*
-** Function  wolf_settings_hook():
+** Function  wolf_submenu_hook():
 **  - Meets the events on "Settings" && "Control panel" windows
 ** Variables:
 **  - $this.window = (m->type == 2) ? settings : control_panel;
 **  - x,y = mouse click position with coordinates x,y.
 */
 
-void    wolf_settings_hook(int x, int y, t_mlx *m)
+void    wolf_submenu_hook(int x, int y, t_mlx *m)
 {
     if ((y > 142 && y < 172 && x > 132 && x < 160) ||
             (y > 806 && y < 879 && x > 546 && x < 777))
@@ -54,8 +59,8 @@ void    wolf_settings_hook(int x, int y, t_mlx *m)
         m->type = m->game ? 1 : 0;
         wolf_load_menu(m);
     }
-    if (m->type == 2 && wolf_settings_buttons(x, y, m))
-        wolf_load_settings(m, 2);
+    if (m->type == 2 && wolf_submenu_buttons(x, y, m))
+        wolf_load_submenu(m, 2);
 }
 
 /*
@@ -81,6 +86,7 @@ int     wolf_onbutton(int button, t_mlx *m)
             m->game = 0;
             m->type = 1;
             wolf_load_menu(m);
+            return (1);
         }
     }
     else
@@ -115,7 +121,7 @@ int     wolf_onmouse(int b, int x, int y, t_mlx *m)
     if (m->type == 0 || m->type == 1)       // main menu type (game was started or not)
         wolf_menu_hook(x, y, m);
     else if (m->type == 2 || m->type == 3)  // in-submenu mode
-        wolf_settings_hook(x, y, m);
+        wolf_submenu_hook(x, y, m);
 //    else if (m->type == 4)                  // in-game mode
 //        ;
     return (1);

@@ -131,6 +131,7 @@ typedef struct      s_map{
     float           curtime;
     double          mspeed;
     double          rspeed;
+    int             score;
 }                   t_map;
 
 
@@ -184,6 +185,8 @@ typedef struct      s_mlx{
     int			    bpp;
     int             end;
     int			    sl;
+    int             width;
+    int             height;
     int             c;
     int             mus;
     int             part;
@@ -233,6 +236,10 @@ void    wolf_settings_add(t_mlx *m);
 ** _______________________________________________________________________ø
 */
 
+
+void    wolf_submenu_hook(int x, int y, t_mlx *m);
+int     wolf_submenu_buttons(int x, int y, t_mlx *m);
+void    wolf_menu_hook(int x, int y, t_mlx *m);
 int     wolf_onbutton(int button, t_mlx *m);
 int     wolf_onmouse(int b, int x, int y, t_mlx *m);
 
@@ -245,9 +252,10 @@ int     wolf_onmouse(int b, int x, int y, t_mlx *m);
 */
 int     wolf_load_game(t_mlx *m, int x);
 void    wolf_load_image(t_mlx *m, t_ray *r, int x);
-void    wolf_load_menu(t_mlx *m);
-
 void    wolf_load_default(t_mlx *m);
-void    wolf_load_settings(t_mlx *m, int type);
+
+
+void    wolf_load_submenu(t_mlx *m, int type);
+void    wolf_load_menu(t_mlx *m);
 
 #endif //WOLF3D
