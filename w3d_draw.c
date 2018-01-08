@@ -13,12 +13,12 @@ void	wolf_pixel_draw(t_mlx *m, t_ray *r, int x, int y)
     int c;
 
     c = 0xFFFFFF;
-    if (map[r->mapx][r->mapy] == 1)
-        c = 0x05e2f4;
-    else if (map[r->mapx][r->mapy] == 2)
-        c = 0x00ff5e;
-    else if (map[r->mapx][r->mapy] == 3)
-        c = 0xffb709;
+//    if (map[r->mapx][r->mapy] == 1)
+//        c = 0x05e2f4;
+//    else if (map[r->mapx][r->mapy] == 2)
+//        c = 0x00ff5e;
+//    else if (map[r->mapx][r->mapy] == 3)
+//        c = 0xffb709;
     m->im[x + y] = (char)(c);
     m->im[x + y + 1] = (char)(c >> 8);
     m->im[x + y + 2] = (char)(c >> 16);

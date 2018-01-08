@@ -16,9 +16,10 @@ void    wolf_load_image(t_mlx *m, t_ray *r, int x)
     r->edraw = lheight / 2 + HEIGHT / 2;
     if (r->sdraw < 0)
         r->sdraw = 0;
-    if (r->edraw >= HEIGHT)
+    if (r->edraw >= HEIGHT || r->edraw + 1 >= HEIGHT)
         r->edraw = HEIGHT - 1;
     wolf_bresenhem(m, r, x, 0);
+    //printf(COL_MAGENTA"x:[%d] start:[%d] end:[%d]\n"COL_EOC, x, r->sdraw, r->edraw);
     ++r->edraw;
     if (r->edraw >= HEIGHT || r->edraw < 0)
         r->edraw = HEIGHT - 1;
@@ -38,7 +39,7 @@ int    wolf_dda(t_ray *r)
     if (r->dsidex < r->dsidey)
     {
         r->side = 0;
-        r->mapy += r->stepx;
+        r->mapx += r->stepx;
         r->dsidex += r->_distx;
     }
     else
@@ -121,15 +122,19 @@ int    wolf_load_game(t_mlx *m, int x)
 {
     t_ray r;
 
+    mlx_clear_window(m->mlx, m->win);                               // clear previous image
+    m->img = mlx_new_image(m->win, WIDTH, HEIGHT + 1);              // creating new image
+    m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);    // gets data addr
     r = wolf_define_ray(&m->g, x);                                  // ray-casting calculates
     wolf_define_dside(&r);                                          // step calculates
-    if (r.side)                                                     // distance projected on cam direction calculates
+    if (!r.side)                                                    // distance projected on cam direction calculates
         r.wdist = (r.mapx - r.rposx + (1 - r.stepx) / 2) / r.rdirx;
     else
         r.wdist = (r.mapy - r.rposy + (1 - r.stepy) / 2) / r.rdiry;
     wolf_load_image(m, &r, x);                                      // step drawing calls from here
-    if (x < 1200)                                                   // recursive exit condition
+    if (x < WIDTH)                                                   // recursive exit condition
         return (wolf_load_game(m, ++x));
+    mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
     wolf_draw_info(m);                                              // drawing game info-menu here
     return (0xDEAD);                                                // fun useless return
 }

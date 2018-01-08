@@ -66,22 +66,26 @@ void    wolf_submenu_hook(int x, int y, t_mlx *m)
 /*
 ** Function wolf_onbutton():
 **  - Meets the button events(in-game mode priority)
+**  - Buttons: 0  - A (move left)
+**             2  - D (move right)
+**             1  - S (move back)
+**             13 - W (move forward)
+**             53 - ESC (exit)
 */
 
 int     wolf_onbutton(int button, t_mlx *m)
 {
     //mlx_clear_window(m->mlx, m->win); //clear previous image
-    //debug features
     printf(COL_GREEN"button:\n\t\tkey: %d\n"COL_EOC, button);
     if (button == 53)
         exit(53);
     else if (m->game)
     {
-        if (button == 13 || button == 1) // W & S
+        if (button == 13 || button == 1)        // W & S
             wolf_move_ws(m, button);
-        else if (button == 0 || button == 2) // A & D
+        else if (button == 0 || button == 2)    // A & D
             wolf_move_ad(m, button);
-        else if (button == 35)              //pause, loading menu
+        else if (button == 35)                  // pause, loading menu
         {
             m->game = 0;
             m->type = 1;
@@ -91,18 +95,18 @@ int     wolf_onbutton(int button, t_mlx *m)
     }
     else
         return (0);
-    mlx_clear_window(m->mlx, m->win); //clear previous image
-    mlx_do_sync(m->mlx);
-    m->img = mlx_new_image(m->win, WIDTH, HEIGHT + 1);
-    m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
+//    mlx_clear_window(m->mlx, m->win); //clear previous image
+//    mlx_do_sync(m->mlx);
+//    m->img = mlx_new_image(m->win, WIDTH, HEIGHT + 1);
+//    m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
     wolf_load_game(m, 0);
-    mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
+//    mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
     return (1);
 }
 
 /*
 ** m.type variations:
-**     0: menu window with turned OFF "Resume"
+**     0: menu window with turned OFF "Resume" (default0)
 **     1: menu window with turned ON "Resume"
 **     2: settings menu window
 **     3: control panel menu window
