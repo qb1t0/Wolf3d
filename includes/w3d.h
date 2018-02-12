@@ -11,6 +11,8 @@
 # define N 4                /* threads number   */
 # define HEIGHT 960         /* window height    */
 # define WIDTH 1280         /* window width     */
+# define THEIGHT 64         /* texture height   */
+# define TWIDTH 64          /* texture widht    */
 # define MHEIGHT 24         /* map height       */
 # define MWIDTH 24          /* map width        */
 # define USAGE "[usage]:\t./wolf3d"
@@ -91,8 +93,8 @@ typedef struct      s_ray{
     int             side;   //was a NS or a EW wall hit?
     int             mapx;
     int             mapy;
-    int             stepx;  //what direction to step in x or y-direction (either +1 or -1)
-    int             stepy;
+    double             stepx;  //what direction to step in x or y-direction (either +1 or -1)
+    double             stepy;
     int             sdraw;
     int             edraw;
 }                   t_ray;
@@ -163,6 +165,9 @@ typedef struct      s_bres{
 **  Variables needed by the mlx library functions
 ** _______________________________________________________________________
 **                                                                        ø
+**  exp_x;  +==\\                                                         ø
+**              ))  uses for saving mouse position                        ø
+**  exp_y;  +==//                                                         ø
 **  *mlx;   +==))   mlx process pointer                                   ø
 **  *win;   +==))   mlx->window pointer                                   ø
 **  *img;   +==))   mlx->image pointer                                    ø
@@ -178,6 +183,8 @@ typedef struct      s_bres{
 */
 
 typedef struct      s_mlx{
+    int             exp_x;
+    int             exp_y;
     void		    *mlx;
     void		    *win;
     void		    *img;
@@ -199,6 +206,8 @@ typedef struct      s_mlx{
     int             score;
     int             speed;
     struct s_map    g;
+    char            *get_txt[5];
+    void            *pic_txt[5];
 }                   t_mlx;
 
 /*
@@ -207,11 +216,13 @@ typedef struct      s_mlx{
 **                                                                        ø
 **  wolf_move_ws() moving BACK/FORWARD                                    ø
 **  wolf_move_ad() moving LEFT/RIGHT                                      ø
+**  wolf_mouse_expose turning screen to the LEFT/RIGHT                    ø
 ** _______________________________________________________________________ø
 */
 
 void    wolf_move_ws(t_mlx *m, int type);
 void    wolf_move_ad(t_mlx *m, int type);
+int    wolf_mouse_expose(int x, int y, t_mlx *m);
 
 /*
 ** Function wolf_pixel_draw():
@@ -221,13 +232,16 @@ void    wolf_move_ad(t_mlx *m, int type);
 ** _______________________________________________________________________ø
 */
 
-void	wolf_pixel_draw(t_mlx *f, t_ray *r, int x, int y);
+void    wolf_cal_tex(t_mlx *m, t_ray *r, int start, int end, int lheight, int x);
+//int	    wolf_pixel_draw(t_mlx *f, t_ray *r, int x, int y);
+int	    wolf_pixel_draw(t_ray *r);
 void    wolf_draw_info(t_mlx *m);
-void	wolf_bresenhem(t_mlx *m, t_ray *r, int x, int layer);
+//void	wolf_bresenhem(t_mlx *m, t_ray *r, int x, int layer);
 
 
 //TodO: add description
 void    wolf_settings_add(t_mlx *m);
+
 /*
 ** Functions wolf_onbutton(), wolf_onmouse():
 ** _______________________________________________________________________

@@ -1,0 +1,3 @@
+/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir

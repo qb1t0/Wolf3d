@@ -76,6 +76,8 @@ void    wolf_submenu_hook(int x, int y, t_mlx *m)
 int     wolf_onbutton(int button, t_mlx *m)
 {
     //mlx_clear_window(m->mlx, m->win); //clear previous image
+    mlx_do_sync(m->mlx);
+    mlx_clear_window(m->mlx, m->win);                                   // clear previous image
     printf(COL_GREEN"button:\n\t\tkey: %d\n"COL_EOC, button);
     if (button == 53)
         exit(53);
@@ -118,7 +120,8 @@ int     wolf_onmouse(int b, int x, int y, t_mlx *m)
     if (b != 1)                             // if !left mouse click event
         return (0);
     //mlx_clear_window(m->mlx, m->win); //clear previous image
-
+    mlx_do_sync(m->mlx);
+    mlx_clear_window(m->mlx, m->win);                                   // clear previous image
     //debug features
     printf(COL_LBLUE"mouse: \n\t\tkey: %d, x: %d, y: %d\n"COL_EOC, b, x, y);
     //main functional code here

@@ -43,6 +43,7 @@ void    wolf_settings_add(t_mlx *m)
 
 void    wolf_load_submenu(t_mlx *m, int type)
 {
+    mlx_do_sync(m->mlx);
     m->type = type; //redefining global type in structure
     if (type == 3)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/control.xpm", &m->width, &m->height);
