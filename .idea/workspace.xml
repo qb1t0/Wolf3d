@@ -11,53 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36554b4f-b27f-446c-ace3-20c5f5011c96" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/maps/map2" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/wolf_intro.c" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/C.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/C.includecache" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/build.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/link.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_draw.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_draw.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_events.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_events.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_game.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_game.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_contoll.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_contoll.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_menu.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_menu.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_other.c.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/wolf3d_" afterPath="$PROJECT_DIR$/cmake-build-debug/wolf3d_" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/wolf3d_.cbp" afterPath="$PROJECT_DIR$/cmake-build-debug/wolf3d_.cbp" />
-      <change beforePath="$PROJECT_DIR$/includes/w3d.h" afterPath="$PROJECT_DIR$/includes/w3d.h" />
-      <change beforePath="$PROJECT_DIR$/pictures/42.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/chizh.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/chizh.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/imac.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/imac.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/knuckles.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/shrek.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/unit.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/unit.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/window.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/pictures/window.xpm" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/w3d.c" afterPath="$PROJECT_DIR$/w3d.c" />
-      <change beforePath="$PROJECT_DIR$/w3d_draw.c" afterPath="$PROJECT_DIR$/w3d_draw.c" />
-      <change beforePath="$PROJECT_DIR$/w3d_events.c" afterPath="$PROJECT_DIR$/w3d_events.c" />
-      <change beforePath="$PROJECT_DIR$/w3d_game.c" afterPath="$PROJECT_DIR$/w3d_game.c" />
-      <change beforePath="$PROJECT_DIR$/wolf_contoll.c" afterPath="$PROJECT_DIR$/wolf_contoll.c" />
-      <change beforePath="$PROJECT_DIR$/wolf_menu.c" afterPath="$PROJECT_DIR$/wolf_menu.c" />
-      <change beforePath="$PROJECT_DIR$/wolf_other.c" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/wolf_parsefile.c" afterPath="$PROJECT_DIR$/wolf_parsefile.c" />
-    </list>
+    <list default="true" id="36554b4f-b27f-446c-ace3-20c5f5011c96" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -410,7 +364,7 @@
       <workItem from="1520604220624" duration="8135000" />
       <workItem from="1520704973565" duration="2251000" />
       <workItem from="1520784673130" duration="5645000" />
-      <workItem from="1520870613808" duration="6030000" />
+      <workItem from="1520870613808" duration="6133000" />
     </task>
     <task id="LOCAL-00001" summary="2nd commit:&#10;- Configuring Makefile (CMake.txt);&#10;- Created argument validation;&#10;- Created project structure;&#10;- Adding libft.a library with default 42 functions;&#10;- Adding mlx.a library, defining defaults;&#10;- Adding debugging tests for key hooks and mouse events;&#10;- Adding function declarations with descriptions;&#10;- Successful window creating.">
       <created>1513966406718</created>
@@ -482,11 +436,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515437920798</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="if have finally done it! (_/o)/ (&lt;--dab _/)">
+      <created>1520878467711</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1520878467712</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224090000" />
+    <option name="totallyTimeSpent" value="224193000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="76" y="23" width="2181" height="1596" extended-state="0" />
@@ -548,7 +509,8 @@
     <MESSAGE value="nothing works, merry christmas" />
     <MESSAGE value="nothing done, adding few comments" />
     <MESSAGE value="maksym helped me with bug m.side==0&#10;result: I have no segfalts now, &#10;so tomorrow I will draw all of those shit" />
-    <option name="LAST_COMMIT_MESSAGE" value="maksym helped me with bug m.side==0&#10;result: I have no segfalts now, &#10;so tomorrow I will draw all of those shit" />
+    <MESSAGE value="if have finally done it! (_/o)/ (&lt;--dab _/)" />
+    <option name="LAST_COMMIT_MESSAGE" value="if have finally done it! (_/o)/ (&lt;--dab _/)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
