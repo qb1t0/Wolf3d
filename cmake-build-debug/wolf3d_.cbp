@@ -102,10 +102,13 @@
 		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_contoll.c">
 			<Option target="wolf3d_"/>
 		</Unit>
-		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_menu.c">
+		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c">
 			<Option target="wolf3d_"/>
 		</Unit>
-		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_other.c">
+		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c">
+			<Option target="wolf3d_"/>
+		</Unit>
+		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_menu.c">
 			<Option target="wolf3d_"/>
 		</Unit>
 		<Unit filename="/Users/ysalata/CLionProjects/wolf3d_/wolf_parsefile.c">

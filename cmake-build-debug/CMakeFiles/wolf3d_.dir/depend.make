@@ -26,15 +26,20 @@ CMakeFiles/wolf3d_.dir/wolf_contoll.c.o: ../libft/ft_printf/ft_printf.h
 CMakeFiles/wolf3d_.dir/wolf_contoll.c.o: ../libft/libft.h
 CMakeFiles/wolf3d_.dir/wolf_contoll.c.o: ../wolf_contoll.c
 
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: ../includes/w3d.h
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: ../libft/ft_printf/ft_printf.h
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: ../libft/libft.h
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: ../wolf_gifs.c
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: ../includes/w3d.h
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: ../libft/ft_printf/ft_printf.h
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: ../libft/libft.h
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: ../wolf_intro.c
+
 CMakeFiles/wolf3d_.dir/wolf_menu.c.o: ../includes/w3d.h
 CMakeFiles/wolf3d_.dir/wolf_menu.c.o: ../libft/ft_printf/ft_printf.h
 CMakeFiles/wolf3d_.dir/wolf_menu.c.o: ../libft/libft.h
 CMakeFiles/wolf3d_.dir/wolf_menu.c.o: ../wolf_menu.c
-
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: ../includes/w3d.h
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: ../libft/ft_printf/ft_printf.h
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: ../libft/libft.h
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: ../wolf_other.c
 
 CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o: ../includes/w3d.h
 CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o: ../libft/ft_printf/ft_printf.h

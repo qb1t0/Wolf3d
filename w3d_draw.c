@@ -1,23 +1,31 @@
 #include "includes/w3d.h"
 
 /*
-** Setting colors(RGB) for each pixel in 4 bytes of f->im(char *)
-**  f := mlx struct
-**  x := x-axis coordinate * f->bpp / 8
-**  y := y-axis coordinate * f->sl
-**  c := RGBA(4 bits x 4 blocks) color
+**  Function wolf_texture_choose():
+**  - Choose which image for texture printing should be used
+**  int type:
+**  if == (0) => walls drawing
+**  if == (1) => floor drawing
+**  if == (2) => ceiling drawing
+**
 */
-
-int	wolf_pixel_draw(t_ray *r)
+int	wolf_texture_choose(t_ray *r, t_mlx *m, int type)
 {
-    if (map[r->mapx][r->mapy] && !r->side && r->rdirx > 0)
+    int **map;
+
+    map = m->map;
+    if (type == 1)
         return (0);
-    else if (map[r->mapx][r->mapy] && !r->side && r->rdirx < 0)
-        return (1);
-    else if (map[r->mapx][r->mapy] && r->side && r->rdiry < 0)
+    else if (type == 2)
+        return (4);
+    else if (map[r->mapx][r->mapy] && !r->side && r->rdirx > 0)
         return (2);
-    else if (map[r->mapx][r->mapy] && r->side && r->rdiry > 0)
+    else if (map[r->mapx][r->mapy] && !r->side && r->rdirx < 0)
         return (3);
+    else if (map[r->mapx][r->mapy] && r->side && r->rdiry < 0)
+        return (8);
+    else if (map[r->mapx][r->mapy] && r->side && r->rdiry > 0)
+        return (6);
 }
 
 /*
@@ -32,78 +40,100 @@ void    wolf_draw_info(t_mlx *m)
     m->g.oldtime = m->g.curtime;
     m->g.curtime = clock();
     m->g.curtime /= CLOCKS_PER_SEC;
-    m->_fps = ft_itoa((1.0 / (m->g.curtime- m->g.oldtime)));
+    m->_fps = ft_itoa((int)(1.0 / (m->g.curtime- m->g.oldtime)) + 40); //;)))
     m->_score = ft_itoa(m->score);
-    m->g.mspeed = (m->g.curtime - m->g.oldtime) * 15.0; // move speed (squares/sec)
-    m->g.rspeed = (m->g.curtime - m->g.oldtime) * 15.0; // rotation speed (radians/sec)
-    mlx_string_put(m->mlx, m->win, 700, 0, 0x000000, "fps:");
-    mlx_string_put(m->mlx, m->win, 760, 0, 0x000000, m->_fps);
-    mlx_string_put(m->mlx, m->win, 700, 50, 0x000000, "score:");
-    mlx_string_put(m->mlx, m->win, 760, 50, 0x000000, m->_score);
+    m->g.mspeed = (m->g.curtime - m->g.oldtime) * 5.0 * m->speed; // move speed (squares/sec)
+    m->g.rspeed = (m->g.curtime - m->g.oldtime) * 4.5;            // rotation speed (radians/sec)
+    if (m->fps > 0)
+    {
+        mlx_string_put(m->mlx, m->win, 150, 50, 0xffffff, "FPS:");
+        mlx_string_put(m->mlx, m->win, 220, 50, 0xffffff, (m->_fps));
+        mlx_string_put(m->mlx, m->win, 150, 90, 0xffffff, "SCORE:");
+        mlx_string_put(m->mlx, m->win, 220, 90, 0xffffff, m->_score);
+    }
+    else
+        mlx_string_put(m->mlx, m->win, 30, 50, 0xffffff, "Press [F] to show FPS and score");
     // free allocated memory by itoa():
     ft_strdel(&m->_score);
     ft_strdel(&m->_fps);
 }
 
 /*
-** Calculating && Initializing delta's for Bresemham's algorithm
+** Function wolf_draw_texture():
+** - texturing calculations
+**
 */
-
-void	wolf_delta_init(t_bres *f, int end, int start, int x)
+void    wolf_draw_texture(t_mlx *m, t_ray *r, int start, int end)
 {
-    f->dx = 0;
-    f->dy = end - start;
-    f->incr_x = f->dx > 0 ? 1 : -1;
-    f->incr_y = f->dy > 0 ? 1 : -1;
-    f->dx = abs(f->dx);
-    f->dy = abs(f->dy);
-    if (f->dx > f->dy)
+    int    d;
+    int    tnum;
+    int    texy;
+    int    xtex; //x coordinate on the texture
+
+    xtex = (int)(r->wallx * (double)TWIDTH);
+    if ((!r->side  && r->rdirx > 0) || (r->side == 1 && r->rdiry < 0))
+        xtex = TWIDTH - xtex - 1;
+    tnum = wolf_texture_choose(r, m, 0);
+    while (start < end)
     {
-        f->_incr_x = f->incr_x;
-        f->_incr_y = 0;
-        f->dh = f->dx;
-        f->de = f->dy;
+        /*
+        ** Setting colors(RGB) for each pixel in 4 bytes of f->im(char *)
+        **  r->x  := x-axis coordinate
+        **  start := y-axis coordinate * f->sl
+        **  RGBA(4 bits x 4 blocks) color
+        */
+        d = start * 256 - HEIGHT * 128 + r->lheight * 128;
+        texy = ((d * THEIGHT)  / r->lheight) / 256;
+        m->im[r->x * m->bpp / 8 + start * m->sl] = m->get_txt[tnum][256 * texy + xtex * 4];
+        m->im[r->x * m->bpp / 8 + start * m->sl + 1] = m->get_txt[tnum][256 * texy + xtex * 4 + 1];
+        m->im[r->x * m->bpp / 8 + start * m->sl + 2] = m->get_txt[tnum][256 * texy + xtex * 4 + 2];
+        m->im[r->x * m->bpp / 8 + start * m->sl + 3] = m->get_txt[tnum][256 * texy + xtex * 4 + 3];
+        start++;
+    }
+}
+
+void    wolf_draw_floor(t_mlx *m, t_ray *r, int y, int type)
+{
+    int tnum;
+    int tx; //texture x coordinate
+    int ty; //texture y coordinate
+
+    tx = r->tfloorx;
+    ty = r->tfloory;
+    tnum = wolf_texture_choose(r, m, type);
+    m->im[r->x * m->bpp / 8 + y * m->sl] = m->get_txt[tnum][256 * ty + tx * 4];
+    m->im[r->x * m->bpp / 8 + y * m->sl + 1] = m->get_txt[tnum][256 * ty + tx * 4 + 1];
+    m->im[r->x * m->bpp / 8 + y * m->sl + 2] = m->get_txt[tnum][256 * ty + tx * 4 + 2];
+    m->im[r->x * m->bpp / 8 + y * m->sl + 3] = m->get_txt[tnum][256 * ty + tx * 4 + 3];
+}
+
+void    wolf_calc_floor(t_mlx *m, t_ray *r, int start, int end)
+{
+    double weight;
+    double pdist;   //player distance
+    double cdist;   //current distance
+
+    pdist = 0;
+    if (!r->side)
+    {
+        r->fxwall = r->rdirx > 0 ? r->mapx : r->mapx + 1.0;
+        r->fywall = r->mapy + r->wallx;
     }
     else
     {
-        f->_incr_x = 0;
-        f->_incr_y = f->incr_y;
-        f->dh = f->dy;
-        f->de = f->dx;
+        r->fywall = r->rdiry > 0 ? r->mapy : r->mapy + 1.0;
+        r->fxwall = r->mapx + r->wallx;
     }
-    f->x = x;
-    f->y = start;
-    f->e = f->dh / 2;
-}
-
-/*
-** Bresenham's drawing line algorithm implementation:
-*/
-
-void	wolf_bresenhem(t_mlx *m, t_ray *r, int x, int layer)
-{
-    t_bres  a;
-
-    wolf_delta_init(&a, r->edraw, r->sdraw, x);
-//    wolf_pixel_draw(m, r, a.x * m->bpp / 8, a.y * m->sl);
-//    for (int i = a.y; i < r->edraw; i++)
-//        wolf_pixel_draw(m, r, x * m->bpp / 8, i * m->sl);
-//    while (++k < a.dh)
-//    {
-//        a.e -= a.de;
-//        if (a.e < 0)
-//        {
-//            a.e += a.dh;
-//            a.x += a.incr_x;
-//            a.y += a.incr_y;
-//        }
-//        else
-//        {
-//            a.x += a._incr_x;
-//            a.y += a._incr_y;
-//        }
-//        wolf_pixel_draw(m, r, x * m->bpp / 8, a.y * m->sl);
-//    }
-//    for (int i = 0; i < a.y; i++)
-//        wolf_pixel_draw(m, r, x * m->bpp / 8, i * m->sl);
+    (end < 0) ? end = HEIGHT - 1 : 0;
+    while (++end < HEIGHT)
+    {
+        cdist = HEIGHT / (2.0 * end - HEIGHT);
+        weight = (cdist - pdist) / (r->wdist - pdist);
+        r->cfloorx = weight * r->fxwall + (1.0 - weight) * r->rposx;
+        r->cfloory = weight * r->fywall + (1.0 - weight) * r->rposy;
+        r->tfloorx = (int)(r->cfloorx * 64) % 64;
+        r->tfloory = (int)(r->cfloory * 64) % 64;
+        wolf_draw_floor(m, r, end, 1); //floor draw
+        wolf_draw_floor(m, r, HEIGHT - end, 2); //ceiling draw
+    }
 }

@@ -8,50 +8,66 @@
 # include "../libft/libft.h"
 # include "../libft/ft_printf/ft_printf.h"
 
-# define N 4                /* threads number   */
-# define HEIGHT 960         /* window height    */
-# define WIDTH 1280         /* window width     */
-# define THEIGHT 64         /* texture height   */
-# define TWIDTH 64          /* texture widht    */
-# define MHEIGHT 24         /* map height       */
-# define MWIDTH 24          /* map width        */
+# define HEIGHT 960         /* window height        */
+# define WIDTH 1280         /* window width         */
+# define THEIGHT 64         /* texture height       */
+# define TWIDTH 64          /* texture width        */
+
+# define GIF1_LEN 10        /* girls frames numb    */
+# define GIF2_LEN 58        /* snoop frames numb    */
+# define GIF3_LEN 15        /* doggy frames numb    */
+# define GIF4_LEN 28        /* rick frames numb     */
+# define GIF5_LEN 10        /* gun frames numb      */
+
+#define SIZE_ERROR "Invalid map: map size must be nxn, \n\t where 5 <= n <= 50\n"
+#define WALL_ERROR "Invalid map: walls around the edges require\n"
+#define PLYR_ERROR "Invalid map: 1 player on map require"
+#define SYMB_ERROR "Invalid map: map can consist only 1, 0 or p"
+
 # define USAGE "[usage]:\t./wolf3d"
+# define INTRO_PATH "../pictures/intro/"
+# define MGIF1_PATH "../pictures/gifs/gif1/"
+# define MGIF2_PATH "../pictures/gifs/gif2/"
+# define MGIF3_PATH "../pictures/gifs/gif3/"
+# define MGIF4_PATH "../pictures/gifs/gif4/"
+# define MGIF5_PATH "../pictures/gifs/gif5/"
+# define WALLS_PATH "../pictures/walls/"
+# define CROSS_PATH "../pictures/crosshair.xpm"
 
 /*
-** Game's map representation
 ** _______________________________________________________________________
 **                                                                        ø
-**  Each array element equal to wall in game                              ø
+**  Game's map representation  (EXAMPLE)                                  ø
+**
+**static short          map[MHEIGHT][MWIDTH] =
+**        {
+**                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+**                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
+**                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+**                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+**        };
 ** _______________________________________________________________________ø
 */
-
-static short          map[MHEIGHT][MWIDTH] =
-        {
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-                {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-        };
 
 /*
 **  Structure s_ray represents ray-casting variables
@@ -82,21 +98,29 @@ typedef struct      s_ray{
     double          rposy;
     double          rdirx;
     double          rdiry;
-    double          distx;
-    double          disty;
     double          _distx;
     double          _disty;
-    double          dsidex; //the length of ray from current position to next x or y-side
+    double          dsidex;     //the length of ray from current position to next x or y-side
     double          dsidey;
-    double          wdist;  //the length of the ray to the wall.
-    int             hit;    //was there a wall hit?
-    int             side;   //was a NS or a EW wall hit?
+    double          wdist;      //the length of the ray to the wall.
+    int             hit;        //was there a wall hit?
+    int             side;       //was a NS or a EW wall hit?
     int             mapx;
     int             mapy;
-    double             stepx;  //what direction to step in x or y-direction (either +1 or -1)
-    double             stepy;
+    double          stepx;      //what direction to step in x or y-direction (either +1 or -1)
+    double          stepy;
+    double          wallx;      //where exactly the wall was hit
+    double          fxwall;
+    double          fywall;
+    double          cfloorx;    //current floor coordinate n x-axis
+    double          cfloory;    //current floor coordinate n y-axis
+    int             tfloorx;    //texture x-coordinate
+    int             tfloory;    //texture y-coordinate
+
     int             sdraw;
     int             edraw;
+    int             lheight;    //line(wall y-height)
+    int             x;
 }                   t_ray;
 
 /*
@@ -133,32 +157,7 @@ typedef struct      s_map{
     float           curtime;
     double          mspeed;
     double          rspeed;
-    int             score;
 }                   t_map;
-
-
-/*
-** Structure s_bres uses for variables implementation needed by the
-** Bresenham's algorithm:
-** _______________________________________________________________________
-**                                                                        ø
-//TodO: add description
-** _______________________________________________________________________ø
-*/
-typedef struct      s_bres{
-    int         x;
-    int         y;
-    int         e;
-    int			dx;
-    int			dy;
-    int			dh;
-    int			de;
-    int			incr_x;
-    int			incr_y;
-    int			_incr_x;
-    int			_incr_y;
-
-}                   t_bres;
 
 /*
 **  Structure s_mlx uses for collecting data from mlx functions
@@ -179,10 +178,12 @@ typedef struct      s_bres{
 **  mus;    +==))   music variable ( ? on : off)                          ø
 **  part;   +==))   1/4 part of window for threads                        ø
 **  game;   +==))   if game was started                                   ø
+**  size;   +==))   map size                                              ø
 ** _______________________________________________________________________ø
 */
 
 typedef struct      s_mlx{
+    float           introframe;
     int             exp_x;
     int             exp_y;
     void		    *mlx;
@@ -201,14 +202,91 @@ typedef struct      s_mlx{
     int             game;
     double          t;
     double          _t;
+    int             fps;
     char            *_fps;
     char            *_score;
     int             score;
     int             speed;
     struct s_map    g;
-    char            *get_txt[5];
-    void            *pic_txt[5];
+    char            *get_txt[9];
+    void            *pic_txt[9];
+    int             size;
+    int             **map;
+    int             xplayer;
+    int             yplayer;
+
+    /////////////////////////// gif for here
+    float             g1frame;       // frame counter for girl  (menu)
+    float             g2frame;       // frame counter for snoop (menu)
+    float             g3frame;       // frame counter for dog   (game)
+    float             g4frame;       // frame counter for rick  (menu)
+    float             g5frame;       // frame counter for gun   (game)
+
+    //////////////////////////  storing gif arrays here
+    void            *gif1_toim[GIF1_LEN];   //for mlx_file_to_image()
+    char            *gif1_addr[GIF1_LEN];   //for mlx_get_data_addr()
+    void            *gif2_toim[GIF2_LEN];   //for mlx_file_to_image()
+    char            *gif2_addr[GIF2_LEN];   //for mlx_get_data_addr()
+    void            *gif3_toim[GIF3_LEN];   //for mlx_file_to_image()
+    char            *gif3_addr[GIF3_LEN];   //for mlx_get_data_addr()
+    void            *gif4_toim[GIF4_LEN];   //for mlx_file_to_image()
+    char            *gif4_addr[GIF4_LEN];   //for mlx_get_data_addr()
+    void            *gif5_toim[GIF5_LEN];   //for mlx_file_to_image()
+    char            *gif5_addr[GIF5_LEN];   //for mlx_get_data_addr()
+
+    //////////////////////////  storing crosshair picture data here
+    void            *aim_toim;              //for mlx_file_to_image()
+    char            *aim_addr;              //for mlx_get_data_addr()
+
 }                   t_mlx;
+
+/*
+** Loading an intro functions:
+** _______________________________________________________________________
+**                                                                        ø
+** void    wolf_load_intro(t_mlx *m);.  ø
+** _______________________________________________________________________ø
+*/
+
+void    wolf_load_intro(t_mlx *m);
+void    wolf_intro_here(t_mlx *m);
+
+/*
+** Main program functions:
+** _______________________________________________________________________
+**                                                                        ø
+**  wolf_exit_game()    program exit function                             ø
+**  wolf_load_default() loads default game values                         ø
+ *  main                main its main, oky? )                             ø
+** _______________________________________________________________________ø
+*/
+void    wolf_exit_game(int code);
+int     wolf_main_loop(t_mlx *m);
+int     wolf_load_game(t_mlx *m, int x);
+void    wolf_load_default(t_mlx *m);
+int     main(int ac, char **av);
+
+/*
+** Function for map parsing here:
+** _______________________________________________________________________
+**                                                                        ø
+**  wolf_check_player() writes player coordinates in global structure     ø
+**  wolf_check_line()   map line parsing and player searching             ø
+**  wolf_create_map()   allocates memory for future map array             ø
+**  wolf_parse_map()    input file parsing & writes                       ø
+**  wolf_check_line() check line for walls and player search              ø
+**  wolf_move_ad() moving LEFT/RIGHT                                      ø
+**  wolf_mouse_expose turning screen to the LEFT/RIGHT                    ø
+** _______________________________________________________________________ø
+*/
+
+
+void    wolf_check_player(t_mlx *m, int player, int i, int j);
+void    wolf_check_line(const char *buf, int ***mass, int line, int len);
+int     **wolf_create_map(int len);
+void    wolf_parse_map(int len, int fd, t_mlx *m, int ***mass);
+int     **wolf_map_open(char *name, t_mlx *m);
+
 
 /*
 ** Function for game controls:
@@ -222,7 +300,7 @@ typedef struct      s_mlx{
 
 void    wolf_move_ws(t_mlx *m, int type);
 void    wolf_move_ad(t_mlx *m, int type);
-int    wolf_mouse_expose(int x, int y, t_mlx *m);
+int     wolf_mouse_expose(int x, int y, t_mlx *m);
 
 /*
 ** Function wolf_pixel_draw():
@@ -232,15 +310,17 @@ int    wolf_mouse_expose(int x, int y, t_mlx *m);
 ** _______________________________________________________________________ø
 */
 
-void    wolf_cal_tex(t_mlx *m, t_ray *r, int start, int end, int lheight, int x);
-//int	    wolf_pixel_draw(t_mlx *f, t_ray *r, int x, int y);
-int	    wolf_pixel_draw(t_ray *r);
+
+void    wolf_calc_walls(t_mlx *m, t_ray *r);
+void    wolf_calc_floor(t_mlx *m, t_ray *r, int start, int end);
+void    wolf_draw_floor(t_mlx *m, t_ray *r, int y, int type);
+void    wolf_draw_texture(t_mlx *m, t_ray *r, int start, int end);
+int	    wolf_texture_choose(t_ray *r, t_mlx *m, int type);
 void    wolf_draw_info(t_mlx *m);
-//void	wolf_bresenhem(t_mlx *m, t_ray *r, int x, int layer);
+int     wolf_dda(t_ray *r, t_mlx *m);
+void    wolf_define_dside(t_ray *r);
+t_ray   wolf_define_ray(t_map *g, int x);
 
-
-//TodO: add description
-void    wolf_settings_add(t_mlx *m);
 
 /*
 ** Functions wolf_onbutton(), wolf_onmouse():
@@ -257,19 +337,36 @@ void    wolf_menu_hook(int x, int y, t_mlx *m);
 int     wolf_onbutton(int button, t_mlx *m);
 int     wolf_onmouse(int b, int x, int y, t_mlx *m);
 
+
 /*
-** Function wolf_load_menu():
+** GIF-images loading functions:
 ** _______________________________________________________________________
 **                                                                        ø
-** Creates starting page in new widow with game menu.                     ø
+** void    wolf_gamegifs_init(t_mlx *m);    init GIF's using in game      ø
+** void    wolf_menugifs_init(t_mlx *m);    init GIF's using in menu      ø
+** void    wolf_check_gifframe(t_mlx *m);   loops frame iterations        ø
+** void    wolf_gifs_draw(int type);        puts GIF's frame to window    ø
 ** _______________________________________________________________________ø
 */
-int     wolf_load_game(t_mlx *m, int x);
-void    wolf_load_image(t_mlx *m, t_ray *r, int x);
-void    wolf_load_default(t_mlx *m);
 
 
-void    wolf_load_submenu(t_mlx *m, int type);
+void    wolf_gamegifs_init(t_mlx *m, int frames);
+void    wolf_menugifs_init(t_mlx *m, int frames);
+void    wolf_check_gifframe(t_mlx *m);
+void    wolf_gifs_draw(int type, t_mlx *m);
+
+
+/*
+** Menu creating functions:
+** _______________________________________________________________________
+**                                                                        ø
+** wolf_l*oad_menu()Creates starting page in new widow with game menu.    ø
+** _______________________________________________________________________ø
+*/
+
 void    wolf_load_menu(t_mlx *m);
+void    wolf_settings_add(t_mlx *m);
+char    *wolf_create_name(int n, char *path);
+void    wolf_load_submenu(t_mlx *m, int type);
 
 #endif //WOLF3D

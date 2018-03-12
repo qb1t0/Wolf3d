@@ -9,20 +9,12 @@
 
 void        wolf_move_ad(t_mlx *m, int type)
 {
-    double oldd;
-    double oldp;
+    int **map;
 
-
-    oldd = m->g.x_direct;
-    oldp = m->g.x_plane;
+    map = m->map;
+//    system("afplay ../music/_steps.mp3 &");
     if (type == 0)  //(A)
     {
-        /*
-        m->g.x_direct = m->g.x_direct * cos(m->g.rspeed) - m->g.y_direct * sin(m->g.rspeed);
-        m->g.y_direct = oldd * sin(m->g.rspeed) + m->g.y_direct * cos(m->g.rspeed);
-        m->g.x_plane = m->g.x_plane * cos(m->g.rspeed) - m->g.y_plane * sin(m->g.rspeed);
-        m->g.y_plane = oldp * sin(m->g.rspeed) + m->g.y_plane * cos(m->g.rspeed);
-    */
         if (!map[(int)(m->g.x_player - m->g.x_plane * m->g.mspeed)]\
         [(int)(m->g.y_player)])
             m->g.x_player -= m->g.x_plane * m->g.mspeed;
@@ -31,16 +23,8 @@ void        wolf_move_ad(t_mlx *m, int type)
     }
     else //if type == 2(D)
     {
-        /*
-        m->g.x_direct = m->g.x_direct * cos(-m->g.rspeed) - m->g.y_direct * sin(-m->g.rspeed);
-        m->g.y_direct = oldd * sin(-m->g.rspeed) + m->g.y_direct * cos(-m->g.rspeed);
-        m->g.x_plane = m->g.x_plane * cos(-m->g.rspeed) - m->g.y_plane * sin(-m->g.rspeed);
-        m->g.y_plane = oldp * sin(-m->g.rspeed) + m->g.y_plane * cos(-m->g.rspeed);
-        */
-
-        if (!map[(int)(m->g.x_player + m->g.x_plane * m->g.mspeed)]\
-        [(int)(m->g.y_player)])
-        m->g.x_player += m->g.x_plane * m->g.mspeed;
+        if (!map[(int)(m->g.x_player + m->g.x_plane * m->g.mspeed)][(int)(m->g.y_player)])
+            m->g.x_player += m->g.x_plane * m->g.mspeed;
         if (!map[(int)(m->g.x_player)][(int)(m->g.y_player + m->g.y_plane * m->g.mspeed)])
             m->g.y_player += m->g.y_plane * m->g.mspeed;
     }
@@ -55,6 +39,10 @@ void        wolf_move_ad(t_mlx *m, int type)
 
 void        wolf_move_ws(t_mlx *m, int type)
 {
+    int **map;
+
+    map = m->map;
+//    system("afplay ../music/_steps.mp3 &");
     if (type == 13) //(W)
     {
         if (!map[(int)(m->g.x_player + m->g.x_direct * m->g.mspeed)]\
@@ -83,20 +71,20 @@ void        wolf_move_ws(t_mlx *m, int type)
 
 int    wolf_mouse_expose(int x, int y, t_mlx *m)
 {
+
     double oldd;
     double oldp;
-    int lol;
 
-    if (!m->game)
+    if (m->game != 1 || x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
         return (0);
-    mlx_do_sync(m->mlx);
-    mlx_clear_window(m->mlx, m->win);                                   // clear previous image
+//    mlx_do_sync(m->mlx);
+//    mlx_clear_window(m->mlx, m->win);                                   // clear previous image
     oldd = m->g.x_direct;
     oldp = m->g.x_plane;
     //turning to the right
     if (x > m->exp_x)
     {
-        m->g.x_direct = m->g.x_direct * cos(-m->g.rspeed) - m->g.y_direct * sin(-m->g.rspeed);
+        m->g.x_direct = m->g.x_direct * cos(-m->g.rspeed) -  m->g.y_direct * sin(-m->g.rspeed);
         m->g.y_direct = oldd * sin(-m->g.rspeed) + m->g.y_direct * cos(-m->g.rspeed);
         m->g.x_plane = m->g.x_plane * cos(-m->g.rspeed) - m->g.y_plane * sin(-m->g.rspeed);
         m->g.y_plane = oldp * sin(-m->g.rspeed) + m->g.y_plane * cos(-m->g.rspeed);
@@ -109,6 +97,6 @@ int    wolf_mouse_expose(int x, int y, t_mlx *m)
         m->g.y_plane = oldp * sin(m->g.rspeed) + m->g.y_plane * cos(m->g.rspeed);
     }
     m->exp_x = x;
-    wolf_load_game(m, 0);
+//    wolf_load_game(m, 0);
     return (0);
 }

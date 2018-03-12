@@ -1,76 +1,35 @@
 #include "includes/w3d.h"
 
 /*
-** Function wolf_cal_tex():
- * - texturing calculations
-**
-*/
-void    wolf_cal_tex(t_mlx *m, t_ray *r, int start, int end, int lheight, int x)
-{
-    int    tnum;
-    int    xtex; //x coordinate on the texture
-    double xwall;//where exactly the wall was hit
-
-//    tnum = map[r->mapx][r->mapy] - 1; //1 subtracted from it so that texture 0 can be used!
-    xwall = r->side ? r->rposx + r->wdist * r->rdirx : r->rposy + r->wdist * r->rdiry;
-    xwall -= floor((xwall));
-    xtex = (int)(xwall * (double)TWIDTH);
-    if ((!r->side  && r->rdirx > 0) || (r->side == 1 && r->rdiry < 0))
-        xtex = TWIDTH - xtex - 1;
-    tnum = wolf_pixel_draw(r);
-//    mlx_put_image_to_window(m->mlx, m->win, m->pic_txt[1], 700, 700);
-    while (start < end)
-    {
-        int d = start * 256 - HEIGHT * 128 + lheight * 128;
-        int texY = ((d * THEIGHT) / lheight) / 256;
-//        char c = m->get_txt[tnum][THEIGHT * texY + xtex];
-        m->im[x * m->bpp / 8 + start * m->sl] = m->get_txt[tnum][256 * texY + xtex * 4];
-        m->im[x * m->bpp / 8 + start * m->sl + 1] = m->get_txt[tnum][256 * texY + xtex * 4 + 1];
-        m->im[x * m->bpp / 8 + start * m->sl + 2] = m->get_txt[tnum][256 * texY + xtex * 4 + 2];
-        m->im[x * m->bpp / 8 + start * m->sl + 3] = m->get_txt[tnum][256 * texY + xtex * 4 + 3];
-        start++;
-    }
-
-//    for(int y = drawStart; y <drawEnd; y++)
-//    {
-//        int d = y * 256 - h * 128 + lineHeight * 128;  //256 and 128 factors to avoid floats
-//        // TODO: avoid the division to speed this up
-//        int texY = ((d * texHeight) / lineHeight) / 256;
-//        Uint32 color = texture[texNum][texHeight * texY + texX];
-//        //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-//        if(side == 1) color = (color >> 1) & 8355711;
-//        buffer[y][x] = color;
-//    }
-//    m->pic_txt[4] = mlx_xpm_file_to_image(m->mlx, "../pictures/lol.xpm", &m->width, &m->height);
-//    m->get_txt[4] = mlx_get_data_addr(m->pic_txt[4], &m->bpp, &m->sl, &m->end);
-//    mlx_put_image_to_window(m->mlx, m->win, m->pic_txt[4], 0, 0);
-//    mlx_destroy_image(m->mlx, m->img);
-}
-
-/*
 ** Function wolf_load_image():
 ** - calculate the height of the line, that has to be drawn on screen
  * - call drawing algorithm
 */
 //Todo: write drawing func call here(to bresenhem)
 
-void    wolf_load_image(t_mlx *m, t_ray *r, int x)
+void    wolf_calc_walls(t_mlx *m, t_ray *r)
 {
-    int lheight;    //line height
-
-    lheight = (int)(HEIGHT / r->wdist);
-    r->sdraw = -lheight / 2 + HEIGHT / 2;
-    r->edraw = lheight / 2 + HEIGHT / 2;
+    // distance projected on cam direction calculates
+    if (!r->side)
+        r->wdist = (r->mapx - r->rposx + (1 - r->stepx) / 2) / r->rdirx;
+    else
+        r->wdist = (r->mapy - r->rposy + (1 - r->stepy) / 2) / r->rdiry;
+    r->lheight = (int)(HEIGHT / r->wdist);
+    r->sdraw = -r->lheight / 2 + HEIGHT / 2;
+    r->edraw = r->lheight / 2 + HEIGHT / 2;
     if (r->sdraw < 0)
         r->sdraw = 0;
     if (r->edraw >= HEIGHT || r->edraw + 1 >= HEIGHT)
         r->edraw = HEIGHT - 1;
-    wolf_cal_tex(m, r, r->sdraw, r->edraw, lheight, x);
-//    wolf_bresenhem(m, r, x, 0);
+    if (r->side)
+        r->wallx = r->rposx + r->wdist * r->rdirx;
+    else
+        r->wallx = r->rposy + r->wdist * r->rdiry;
+    r->wallx -= floor((r->wallx));
+    wolf_draw_texture(m, r, r->sdraw, r->edraw);
+
+        //debug feature
     //printf(COL_MAGENTA"x:[%d] start:[%d] end:[%d]\n"COL_EOC, x, r->sdraw, r->edraw);
-    ++r->edraw;
-    if (r->edraw >= HEIGHT || r->edraw < 0)
-        r->edraw = HEIGHT - 1;
 }
 
 /*
@@ -82,7 +41,7 @@ void    wolf_load_image(t_mlx *m, t_ray *r, int x)
 ** - check if ray has hit a wall
 */
 
-int    wolf_dda(t_ray *r)
+int    wolf_dda(t_ray *r, t_mlx *m)
 {
     if (r->dsidex < r->dsidey)
     {
@@ -96,8 +55,8 @@ int    wolf_dda(t_ray *r)
         r->mapy += r->stepy;
         r->side = 1;
     }
-    map[r->mapx][r->mapy] > 0 ? r->hit = 1 : 0;
-    return (r->hit == 0 ? wolf_dda(r) : 1);
+    m->map[r->mapx][r->mapy] > 0 ? r->hit = 1 : 0;
+    return (r->hit == 0 ? wolf_dda(r, m) : 1);
 }
 
 /*
@@ -128,7 +87,6 @@ void    wolf_define_dside(t_ray *r)
         r->stepy = 1;
         r->dsidey = (r->mapy + 1.0 - r->rposy) * r->_disty;
     }
-    wolf_dda(r);
 }
 
 /*
@@ -142,6 +100,7 @@ t_ray   wolf_define_ray(t_map *g, int x)
 
     //was there a wall hit?
     r.hit = 0;
+    r.x = x;
 
     //calculate ray position and direction
     r.xcam = 2 * x / (double)WIDTH - 1;
@@ -172,21 +131,19 @@ int    wolf_load_game(t_mlx *m, int x)
 
 //    mlx_do_sync(m->mlx);
 //    mlx_clear_window(m->mlx, m->win);                                   // clear previous image
-    m->img = mlx_new_image(m->win, WIDTH, HEIGHT+1);                    // creating new image
+    m->img = mlx_new_image(m->win, WIDTH, HEIGHT + 1);                    // creating new image
     m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);        // gets data addr
-    while (x < WIDTH) {
+    while (x < WIDTH)
+    {
         r = wolf_define_ray(&m->g, x);                                  // ray-casting calculates
         wolf_define_dside(&r);                                          // step calculates
-        if (!r.side)                                                    // distance projected on cam direction calculates
-            r.wdist = (r.mapx - r.rposx + (1 - r.stepx) / 2) / r.rdirx;
-        else
-            r.wdist = (r.mapy - r.rposy + (1 - r.stepy) / 2) / r.rdiry;
-        wolf_load_image(m, &r, x);                                      // step drawing calls from here
-//    if (x < WIDTH)                                                    // recursive exit condition
-//        return (wolf_load_game(m, ++x));
+        wolf_dda(&r, m);
+        wolf_calc_walls(m, &r);                                      // step wall drawing calls from here
+        wolf_calc_floor(m, &r, r.sdraw, r.edraw);                       // step floor drawing calls from here
         x++;
     }
     mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
     wolf_draw_info(m);                                              // drawing game info-menu here
+    wolf_gifs_draw(1, m);
     return (0xDEAD);                                                // fun useless return
 }

@@ -9,8 +9,9 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/ysalata/CLionProjects/wolf3d_/w3d_events.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_events.c.o"
   "/Users/ysalata/CLionProjects/wolf3d_/w3d_game.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/w3d_game.c.o"
   "/Users/ysalata/CLionProjects/wolf3d_/wolf_contoll.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_contoll.c.o"
+  "/Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_gifs.c.o"
+  "/Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_intro.c.o"
   "/Users/ysalata/CLionProjects/wolf3d_/wolf_menu.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_menu.c.o"
-  "/Users/ysalata/CLionProjects/wolf3d_/wolf_other.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_other.c.o"
   "/Users/ysalata/CLionProjects/wolf3d_/wolf_parsefile.c" "/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

@@ -1,5 +1,6 @@
 #include "includes/w3d.h"
 
+
 /*
 ** Function wolf_settings_add():
 **  - Puts data fields in settings sub-menu
@@ -43,7 +44,7 @@ void    wolf_settings_add(t_mlx *m)
 
 void    wolf_load_submenu(t_mlx *m, int type)
 {
-    mlx_do_sync(m->mlx);
+//    mlx_do_sync(m->mlx);
     m->type = type; //redefining global type in structure
     if (type == 3)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/control.xpm", &m->width, &m->height);
@@ -51,7 +52,8 @@ void    wolf_load_submenu(t_mlx *m, int type)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/setings.xpm", &m->width, &m->height);
     m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
     mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-    mlx_destroy_image(m->mlx, m->img);
+    wolf_gifs_draw(-1, m);
+//    mlx_destroy_image(m->mlx, m->img);
     if (type == 2)
         wolf_settings_add(m);
 }
@@ -65,13 +67,30 @@ void    wolf_load_submenu(t_mlx *m, int type)
 
 void    wolf_load_menu(t_mlx *m)
 {
-    mlx_clear_window(m->mlx, m->win); //clear previous image
+   // m->gif = 1;
+//    wolf_check_gifframe(m);
+//    mlx_clear_window(m->mlx, m->win); //clear previous image
     if (m->type == 1)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/menuon.xpm", &m->width, &m->height);
     else if (!m->type)
         m->img = mlx_xpm_file_to_image(m->mlx, "../pictures/menuoff.xpm", &m->width, &m->height);
     m->im = mlx_get_data_addr(m->img, &m->bpp, &m->sl, &m->end);
+//    while (++i < GIF1_LEN)
+//    {
     mlx_put_image_to_window(m->mlx, m->win, m->img, 0, 0);
-    mlx_destroy_image(m->mlx, m->img);
+    //mlx_destroy_image(m->mlx, m->img);
+//    mlx_put_image_to_window(m->mlx, m->win, m->gif1_toim[(int)m->g1frame], 300, 700);
+//    mlx_put_image_to_window(m->mlx, m->win, m->gif1_toim[(int)m->g1frame], 700, 700);
+//    m->g1frame += 0.4;
+//    if (m->g1frame > GIF1_LEN)
+//        m->g1frame = GIF1_LEN;
+    wolf_gifs_draw(0, m);
+//    mlx_destroy_image(m->mlx, m->gif1_toim[m->g1frame - 1]);
+//        mlx_do_sync(m->mlx);
+//        mlx_clear_window(m->mlx, m->win);
+//    }
+    //mlx_mouse_hook(m->win, wolf_onmouse, &m);                            //  mlx_hook for mouse events
+//    while (m->gif)
+//        wolf_load_menu(m);
 }
 

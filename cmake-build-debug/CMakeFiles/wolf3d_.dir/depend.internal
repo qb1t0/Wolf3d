@@ -26,16 +26,21 @@ CMakeFiles/wolf3d_.dir/wolf_contoll.c.o
  /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h
  /Users/ysalata/CLionProjects/wolf3d_/libft/libft.h
  /Users/ysalata/CLionProjects/wolf3d_/wolf_contoll.c
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o
+ /Users/ysalata/CLionProjects/wolf3d_/includes/w3d.h
+ /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h
+ /Users/ysalata/CLionProjects/wolf3d_/libft/libft.h
+ /Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o
+ /Users/ysalata/CLionProjects/wolf3d_/includes/w3d.h
+ /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h
+ /Users/ysalata/CLionProjects/wolf3d_/libft/libft.h
+ /Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c
 CMakeFiles/wolf3d_.dir/wolf_menu.c.o
  /Users/ysalata/CLionProjects/wolf3d_/includes/w3d.h
  /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h
  /Users/ysalata/CLionProjects/wolf3d_/libft/libft.h
  /Users/ysalata/CLionProjects/wolf3d_/wolf_menu.c
-CMakeFiles/wolf3d_.dir/wolf_other.c.o
- /Users/ysalata/CLionProjects/wolf3d_/includes/w3d.h
- /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h
- /Users/ysalata/CLionProjects/wolf3d_/libft/libft.h
- /Users/ysalata/CLionProjects/wolf3d_/wolf_other.c
 CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o
  /Users/ysalata/CLionProjects/wolf3d_/includes/w3d.h
  /Users/ysalata/CLionProjects/wolf3d_/libft/ft_printf/ft_printf.h

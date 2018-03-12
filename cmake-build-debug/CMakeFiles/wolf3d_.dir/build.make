@@ -153,28 +153,28 @@ CMakeFiles/wolf3d_.dir/w3d_game.c.o.provides: CMakeFiles/wolf3d_.dir/w3d_game.c.
 CMakeFiles/wolf3d_.dir/w3d_game.c.o.provides.build: CMakeFiles/wolf3d_.dir/w3d_game.c.o
 
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: CMakeFiles/wolf3d_.dir/flags.make
-CMakeFiles/wolf3d_.dir/wolf_other.c.o: ../wolf_other.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/wolf3d_.dir/wolf_other.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d_.dir/wolf_other.c.o   -c /Users/ysalata/CLionProjects/wolf3d_/wolf_other.c
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: CMakeFiles/wolf3d_.dir/flags.make
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o: ../wolf_gifs.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/wolf3d_.dir/wolf_gifs.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d_.dir/wolf_gifs.c.o   -c /Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d_.dir/wolf_other.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ysalata/CLionProjects/wolf3d_/wolf_other.c > CMakeFiles/wolf3d_.dir/wolf_other.c.i
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d_.dir/wolf_gifs.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c > CMakeFiles/wolf3d_.dir/wolf_gifs.c.i
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d_.dir/wolf_other.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ysalata/CLionProjects/wolf3d_/wolf_other.c -o CMakeFiles/wolf3d_.dir/wolf_other.c.s
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d_.dir/wolf_gifs.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ysalata/CLionProjects/wolf3d_/wolf_gifs.c -o CMakeFiles/wolf3d_.dir/wolf_gifs.c.s
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.o.requires:
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.requires:
 
-.PHONY : CMakeFiles/wolf3d_.dir/wolf_other.c.o.requires
+.PHONY : CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.requires
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.o.provides: CMakeFiles/wolf3d_.dir/wolf_other.c.o.requires
-	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_other.c.o.provides.build
-.PHONY : CMakeFiles/wolf3d_.dir/wolf_other.c.o.provides
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.provides: CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.requires
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.provides.build
+.PHONY : CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.provides
 
-CMakeFiles/wolf3d_.dir/wolf_other.c.o.provides.build: CMakeFiles/wolf3d_.dir/wolf_other.c.o
+CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.provides.build: CMakeFiles/wolf3d_.dir/wolf_gifs.c.o
 
 
 CMakeFiles/wolf3d_.dir/wolf_contoll.c.o: CMakeFiles/wolf3d_.dir/flags.make
@@ -249,16 +249,41 @@ CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o.provides: CMakeFiles/wolf3d_.dir/wolf_
 CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o.provides.build: CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o
 
 
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: CMakeFiles/wolf3d_.dir/flags.make
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o: ../wolf_intro.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/wolf3d_.dir/wolf_intro.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/wolf3d_.dir/wolf_intro.c.o   -c /Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/wolf3d_.dir/wolf_intro.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c > CMakeFiles/wolf3d_.dir/wolf_intro.c.i
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/wolf3d_.dir/wolf_intro.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ysalata/CLionProjects/wolf3d_/wolf_intro.c -o CMakeFiles/wolf3d_.dir/wolf_intro.c.s
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o.requires:
+
+.PHONY : CMakeFiles/wolf3d_.dir/wolf_intro.c.o.requires
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o.provides: CMakeFiles/wolf3d_.dir/wolf_intro.c.o.requires
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_intro.c.o.provides.build
+.PHONY : CMakeFiles/wolf3d_.dir/wolf_intro.c.o.provides
+
+CMakeFiles/wolf3d_.dir/wolf_intro.c.o.provides.build: CMakeFiles/wolf3d_.dir/wolf_intro.c.o
+
+
 # Object files for target wolf3d_
 wolf3d__OBJECTS = \
 "CMakeFiles/wolf3d_.dir/w3d.c.o" \
 "CMakeFiles/wolf3d_.dir/w3d_events.c.o" \
 "CMakeFiles/wolf3d_.dir/w3d_draw.c.o" \
 "CMakeFiles/wolf3d_.dir/w3d_game.c.o" \
-"CMakeFiles/wolf3d_.dir/wolf_other.c.o" \
+"CMakeFiles/wolf3d_.dir/wolf_gifs.c.o" \
 "CMakeFiles/wolf3d_.dir/wolf_contoll.c.o" \
 "CMakeFiles/wolf3d_.dir/wolf_menu.c.o" \
-"CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o"
+"CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o" \
+"CMakeFiles/wolf3d_.dir/wolf_intro.c.o"
 
 # External object files for target wolf3d_
 wolf3d__EXTERNAL_OBJECTS =
@@ -267,14 +292,15 @@ wolf3d_: CMakeFiles/wolf3d_.dir/w3d.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/w3d_events.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/w3d_draw.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/w3d_game.c.o
-wolf3d_: CMakeFiles/wolf3d_.dir/wolf_other.c.o
+wolf3d_: CMakeFiles/wolf3d_.dir/wolf_gifs.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/wolf_contoll.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/wolf_menu.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o
+wolf3d_: CMakeFiles/wolf3d_.dir/wolf_intro.c.o
 wolf3d_: CMakeFiles/wolf3d_.dir/build.make
 wolf3d_: ../libft/libft.a
 wolf3d_: CMakeFiles/wolf3d_.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable wolf3d_"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ysalata/CLionProjects/wolf3d_/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable wolf3d_"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/wolf3d_.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -286,10 +312,11 @@ CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/w3d.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/w3d_events.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/w3d_draw.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/w3d_game.c.o.requires
-CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_other.c.o.requires
+CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_gifs.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_contoll.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_menu.c.o.requires
 CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_parsefile.c.o.requires
+CMakeFiles/wolf3d_.dir/requires: CMakeFiles/wolf3d_.dir/wolf_intro.c.o.requires
 
 .PHONY : CMakeFiles/wolf3d_.dir/requires
 

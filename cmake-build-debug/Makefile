@@ -258,6 +258,60 @@ wolf_contoll.c.s:
 	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_contoll.c.s
 .PHONY : wolf_contoll.c.s
 
+wolf_gifs.o: wolf_gifs.c.o
+
+.PHONY : wolf_gifs.o
+
+# target to build an object file
+wolf_gifs.c.o:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_gifs.c.o
+.PHONY : wolf_gifs.c.o
+
+wolf_gifs.i: wolf_gifs.c.i
+
+.PHONY : wolf_gifs.i
+
+# target to preprocess a source file
+wolf_gifs.c.i:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_gifs.c.i
+.PHONY : wolf_gifs.c.i
+
+wolf_gifs.s: wolf_gifs.c.s
+
+.PHONY : wolf_gifs.s
+
+# target to generate assembly for a file
+wolf_gifs.c.s:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_gifs.c.s
+.PHONY : wolf_gifs.c.s
+
+wolf_intro.o: wolf_intro.c.o
+
+.PHONY : wolf_intro.o
+
+# target to build an object file
+wolf_intro.c.o:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_intro.c.o
+.PHONY : wolf_intro.c.o
+
+wolf_intro.i: wolf_intro.c.i
+
+.PHONY : wolf_intro.i
+
+# target to preprocess a source file
+wolf_intro.c.i:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_intro.c.i
+.PHONY : wolf_intro.c.i
+
+wolf_intro.s: wolf_intro.c.s
+
+.PHONY : wolf_intro.s
+
+# target to generate assembly for a file
+wolf_intro.c.s:
+	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_intro.c.s
+.PHONY : wolf_intro.c.s
+
 wolf_menu.o: wolf_menu.c.o
 
 .PHONY : wolf_menu.o
@@ -284,33 +338,6 @@ wolf_menu.s: wolf_menu.c.s
 wolf_menu.c.s:
 	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_menu.c.s
 .PHONY : wolf_menu.c.s
-
-wolf_other.o: wolf_other.c.o
-
-.PHONY : wolf_other.o
-
-# target to build an object file
-wolf_other.c.o:
-	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_other.c.o
-.PHONY : wolf_other.c.o
-
-wolf_other.i: wolf_other.c.i
-
-.PHONY : wolf_other.i
-
-# target to preprocess a source file
-wolf_other.c.i:
-	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_other.c.i
-.PHONY : wolf_other.c.i
-
-wolf_other.s: wolf_other.c.s
-
-.PHONY : wolf_other.s
-
-# target to generate assembly for a file
-wolf_other.c.s:
-	$(MAKE) -f CMakeFiles/wolf3d_.dir/build.make CMakeFiles/wolf3d_.dir/wolf_other.c.s
-.PHONY : wolf_other.c.s
 
 wolf_parsefile.o: wolf_parsefile.c.o
 
@@ -363,12 +390,15 @@ help:
 	@echo "... wolf_contoll.o"
 	@echo "... wolf_contoll.i"
 	@echo "... wolf_contoll.s"
+	@echo "... wolf_gifs.o"
+	@echo "... wolf_gifs.i"
+	@echo "... wolf_gifs.s"
+	@echo "... wolf_intro.o"
+	@echo "... wolf_intro.i"
+	@echo "... wolf_intro.s"
 	@echo "... wolf_menu.o"
 	@echo "... wolf_menu.i"
 	@echo "... wolf_menu.s"
-	@echo "... wolf_other.o"
-	@echo "... wolf_other.i"
-	@echo "... wolf_other.s"
 	@echo "... wolf_parsefile.o"
 	@echo "... wolf_parsefile.i"
 	@echo "... wolf_parsefile.s"
